@@ -6,5 +6,10 @@ namespace ProxerSearchPlus.model.v1
         public int code { get; set; }
         public string message { get; set; }
         public Entry[] data { get; set; }
+
+        public Error GetError()
+        {
+            return new Error(error);
+        }
     }
 }

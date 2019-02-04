@@ -5,9 +5,13 @@ namespace ProxerSearchPlus.model.v1
     public class Error
     {
         public ErrorCode ErrorMessage { get; set; }
-        public Error(string message)
+        public Error(string code)
+            : this(int.Parse(code))
+        { }
+
+        public Error(int code)
         {
-            ErrorMessage = (ErrorCode)(int.Parse(message));
+            ErrorMessage = (ErrorCode)(code);
         }
 
         public override string ToString() => Enum.GetName(typeof(ErrorCode), ErrorMessage) + " (" + (int)(ErrorMessage) + ")";
