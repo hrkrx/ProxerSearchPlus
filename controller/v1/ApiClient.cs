@@ -33,7 +33,7 @@ namespace ProxerSearchPlus.controller.v1
             var endPoint = "https://proxer.me/api/v1/list/entrysearch";
             EntrySearch result;
             
-            var request = CreatMessage(endPoint);
+            var request = CreateMessage(endPoint);
 
             if (!string.IsNullOrWhiteSpace(name))
                 request.Properties.Add("name", name);
@@ -71,7 +71,7 @@ namespace ProxerSearchPlus.controller.v1
             return result;
         }
 
-        private HttpRequestMessage CreatMessage(string endPoint, bool testMode = false)
+        private HttpRequestMessage CreateMessage(string endPoint, bool testMode = false)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, endPoint);
             

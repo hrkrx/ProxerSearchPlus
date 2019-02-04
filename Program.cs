@@ -9,6 +9,8 @@ namespace ProxerSearchPlus
         {
             var client = ApiClient.GetInstance();
             var result = client.Search("test", null, null, null, null, null, null, null, null, null, null, null, null, null).GetAwaiter().GetResult();
+            
+
             Console.WriteLine("Hello World!");
         }
     }

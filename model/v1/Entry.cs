@@ -1,3 +1,5 @@
+using System;
+
 namespace ProxerSearchPlus.model.v1
 {
     public class Entry
@@ -14,5 +16,6 @@ namespace ProxerSearchPlus.model.v1
         public int? year { get; set; }
         public int? season { get; set; }
         public string type { get; set; }
+        public DateTime updated = DateTime.UtcNow;
     }
 }
