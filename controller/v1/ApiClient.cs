@@ -77,9 +77,11 @@ namespace ProxerSearchPlus.controller.v1
             
             if (string.IsNullOrWhiteSpace(ApiKey))
                 testMode = true;
-
+            else
+                request.Headers.Add("proxer-api-key", ApiKey);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("User-Agent", "DotNetCoreApiClientLtP");
+
             if (testMode)
                 request.Properties.Add("api_testmode", 1);
 
