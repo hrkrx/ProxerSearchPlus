@@ -1,3 +1,4 @@
+using System.Linq;
 namespace ProxerSearchPlus.model.v1
 {
     public class EntrySearch : IApiResponse
@@ -10,6 +11,13 @@ namespace ProxerSearchPlus.model.v1
         public Error GetError()
         {
             return new Error(error);
+        }
+
+        public override string ToString()
+        {
+            string result = string.Join("\n", data.Select(x => x.ToString()).ToList());
+            result += "\n" + GetError();
+            return result;
         }
     }
 }

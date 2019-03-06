@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -11,6 +12,8 @@ namespace ProxerSearchPlus.controller.v1
         private HttpClient client { get; set; }
 
         public string ApiKey { get; set; }
+
+        public string ApiUserAgent { get; set; }
 
         private ApiClient()
         {
@@ -33,59 +36,81 @@ namespace ProxerSearchPlus.controller.v1
             var endPoint = "https://proxer.me/api/v1/list/entrysearch";
             EntrySearch result;
             
-            var request = CreateMessage(endPoint);
+            
+            var postParameters = new Dictionary<string, string>();
 
             if (!string.IsNullOrWhiteSpace(name))
-                request.Properties.Add("name", name);
+                postParameters.Add("name", name);
             if (!string.IsNullOrWhiteSpace(language))
-                request.Properties.Add("language", language);
+                postParameters.Add("language", language);
             if (!string.IsNullOrWhiteSpace(type))
-                request.Properties.Add("type", type);
+                postParameters.Add("type", type);
             if (!string.IsNullOrWhiteSpace(genre))
-                request.Properties.Add("genre", genre);
+                postParameters.Add("genre", genre);
             if (!string.IsNullOrWhiteSpace(nogenre))
-                request.Properties.Add("nogenre", nogenre);
+                postParameters.Add("nogenre", nogenre);
             if (!string.IsNullOrWhiteSpace(taggenre))
-                request.Properties.Add("taggenre", taggenre);
+                postParameters.Add("taggenre", taggenre);
             if (!string.IsNullOrWhiteSpace(notaggenre))
-                request.Properties.Add("notaggenre", notaggenre);
+                postParameters.Add("notaggenre", notaggenre);
             if (!string.IsNullOrWhiteSpace(fsk))
-                request.Properties.Add("fsk", fsk);
+                postParameters.Add("fsk", fsk);
             if (!string.IsNullOrWhiteSpace(sort))
-                request.Properties.Add("sort", sort);
+                postParameters.Add("sort", sort);
             if (!string.IsNullOrWhiteSpace(length))
-                request.Properties.Add("length", length);
+                postParameters.Add("length", length);
             if (!string.IsNullOrWhiteSpace(lengthlimit))
-                request.Properties.Add("length-limit", lengthlimit);
+                postParameters.Add("length-limit", lengthlimit);
             if (!string.IsNullOrWhiteSpace(tags))
-                request.Properties.Add("tags", tags);
+                postParameters.Add("tags", tags);
             if (!string.IsNullOrWhiteSpace(tagratefilter))
-                request.Properties.Add("tagratefilter", tagratefilter);
+                postParameters.Add("tagratefilter", tagratefilter);
             if (!string.IsNullOrWhiteSpace(limit))
-                request.Properties.Add("limit", limit);
+                postParameters.Add("limit", limit);
 
+            
+            var request = CreateMessage(endPoint, postParameters);
+            
             var response = await client.SendAsync(request);
-
-            result = JsonConvert.DeserializeObject<EntrySearch>(await response.Content.ReadAsStringAsync());
+            var responseString = await response.Content.ReadAsStringAsync();
+            result = JsonConvert.DeserializeObject<EntrySearch>(responseString);
 
             return result;
         }
 
-        private HttpRequestMessage CreateMessage(string endPoint, bool testMode = false)
+        private HttpRequestMessage CreateMessage(string endPoint, Dictionary<string, string> parameters, bool testMode = false)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, endPoint);
             
+            if (string.IsNullOrWhiteSpace(ApiUserAgent))
+            {
+                throw new MissingUserAgentException("ApiUserAgent was not set.");
+            }
+
             if (string.IsNullOrWhiteSpace(ApiKey))
                 testMode = true;
             else
                 request.Headers.Add("proxer-api-key", ApiKey);
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("User-Agent", "DotNetCoreApiClientLtP");
+            request.Headers.Add("User-Agent", ApiUserAgent);
 
             if (testMode)
-                request.Properties.Add("api_testmode", 1);
+                parameters.Add("api_testmode", "1");
+
+            var encodedContent = new FormUrlEncodedContent (parameters);
+            request.Content = encodedContent;
 
             return request;
         }
+    }
+
+    [System.Serializable]
+    public class MissingUserAgentException : System.Exception
+    {
+        public MissingUserAgentException() { }
+        public MissingUserAgentException(string message) : base(message) { }
+        public MissingUserAgentException(string message, System.Exception inner) : base(message, inner) { }
+        protected MissingUserAgentException(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 }
