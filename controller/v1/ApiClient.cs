@@ -29,14 +29,13 @@ namespace ProxerSearchPlus.controller.v1
             return instance;
         }
 
-        public async Task<EntrySearch> Search(string name, string language, string type, string genre, string nogenre, 
+        public async Task<IApiResponse> Search(string name, string language, string type, string genre, string nogenre, 
                                                 string taggenre, string notaggenre, string fsk, string sort, string length, 
                                                 string lengthlimit, string tags, string tagratefilter, string limit,
                                                 string page, string tagspoilerfilter)
         {
             var endPoint = "https://proxer.me/api/v1/list/entrysearch";
             EntrySearch result;
-            
             
             var postParameters = new Dictionary<string, string>();
 
@@ -74,12 +73,12 @@ namespace ProxerSearchPlus.controller.v1
                 postParameters.Add("tagspoilerfilter", tagspoilerfilter);
 
             
-            var request = CreateMessage(endPoint, postParameters);
-            
-            var response = await client.SendAsync(request);
-            var responseString = await response.Content.ReadAsStringAsync();
-            result = JsonConvert.DeserializeObject<EntrySearch>(responseString);
-
+            using(var request = CreateMessage(endPoint, postParameters))
+            {
+                var response = await client.SendAsync(request);
+                var responseString = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<EntrySearch>(responseString);
+            }
             return result;
         }
 
