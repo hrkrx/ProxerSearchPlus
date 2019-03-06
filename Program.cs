@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using ProxerSearchPlus.controller.v1;
 
 namespace ProxerSearchPlus
@@ -12,9 +13,12 @@ namespace ProxerSearchPlus
             var apiKey = File.ReadAllText("api.key");
             client.ApiKey = apiKey;
             client.ApiUserAgent = "DotNetCoreApiClientLtP";
-            var result = client.Search("test", null, null, null, null, null, null, null, null, null, null, null, null, null).GetAwaiter().GetResult();
-            
-            Console.WriteLine(result);
+            var result = client.Search("test", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null).GetAwaiter().GetResult();
+            var entries = result.data.OrderByDescending(x => x.rate_sum / (x.rate_count == 0 ? 1 : x.rate_count));
+            foreach (var entry in entries)
+            {
+                Console.WriteLine(entry);
+            }
         }
     }
 }
