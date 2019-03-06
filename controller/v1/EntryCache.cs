@@ -4,7 +4,7 @@ using ProxerSearchPlus.model.v1;
 
 namespace ProxerSearchPlus.controller.v1
 {
-    public static class SearchCache
+    public static class EntryCache
     {
         private static Dictionary<int, Entry> _EntryCache = new Dictionary<int, Entry>();
 
