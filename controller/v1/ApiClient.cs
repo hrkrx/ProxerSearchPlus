@@ -29,7 +29,7 @@ namespace ProxerSearchPlus.controller.v1
             return instance;
         }
 
-        public async Task<IApiResponse> Search(string name, string language, string type, string genre, string nogenre, 
+        public async Task<EntrySearch> Search(string name, string language, string type, string genre, string nogenre, 
                                                 string taggenre, string notaggenre, string fsk, string sort, string length, 
                                                 string lengthlimit, string tags, string tagratefilter, string limit,
                                                 string page, string tagspoilerfilter)

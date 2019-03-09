@@ -6,6 +6,5 @@ namespace ProxerSearchPlus.model.v1
         int error { get; set; }
         int code { get; set; }
         string message { get; set; }
-        Entry[] data { get; set; }
     }
 }
