@@ -29,6 +29,37 @@ namespace ProxerSearchPlus.controller.v1
             return instance;
         }
 
+        /// <summary>
+        /// This method returns a full entry for a given id while using as much from the cache as possible
+        /// </summary>
+        /// <param name="id">The id</param>
+        /// <param name="disableCache">if you want to load everything from proxer, ignoring the cache.null WARNING: Do not use this for regularly</param>
+        /// <returns>A full entry from proxer</returns>
+        public async Task<FullEntry> GetFullEntry(int id, bool disableCache = false)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Returns a list of "limit" entries for your input parameters
+        /// </summary>
+        /// <param name="name">The name</param>
+        /// <param name="language">The Language (de, en, ...)</param>
+        /// <param name="type">The type (anime, manga, ...)</param>
+        /// <param name="genre">The genre</param>
+        /// <param name="nogenre"></param>
+        /// <param name="taggenre"></param>
+        /// <param name="notaggenre"></param>
+        /// <param name="fsk"></param>
+        /// <param name="sort"></param>
+        /// <param name="length"></param>
+        /// <param name="lengthlimit"></param>
+        /// <param name="tags"></param>
+        /// <param name="tagratefilter"></param>
+        /// <param name="limit"></param>
+        /// <param name="page"></param>
+        /// <param name="tagspoilerfilter"></param>
+        /// <returns></returns>
         public async Task<EntrySearch> Search(string name, string language, string type, string genre, string nogenre, 
                                                 string taggenre, string notaggenre, string fsk, string sort, string length, 
                                                 string lengthlimit, string tags, string tagratefilter, string limit,

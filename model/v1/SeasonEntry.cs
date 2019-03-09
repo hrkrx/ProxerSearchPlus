@@ -1,5 +1,8 @@
+using System;
+
 namespace ProxerSearchPlus.model.v1
 {
+    [Serializable]
     public class SeasonEntry
     {
         public int id { get; set; }

@@ -2,6 +2,7 @@ using System;
 
 namespace ProxerSearchPlus.model.v1
 {
+    [Serializable]
     public class GenreEntry
     {
         public int id { get; set; }
