@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using ProxerSearchPlus.model.v1;
+using ProxerSearchPlus.model.proxer.v1;
 
-namespace ProxerSearchPlus.controller.v1
+namespace ProxerSearchPlus.controller.proxer.v1
 {
     public class ApiClient
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using ProxerSearchPlus.controller.v1;
+using ProxerSearchPlus.controller.proxer.v1;
 
 namespace ProxerSearchPlus
 {

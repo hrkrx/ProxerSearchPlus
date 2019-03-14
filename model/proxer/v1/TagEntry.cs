@@ -1,6 +1,6 @@
 using System;
 
-namespace ProxerSearchPlus.model.v1
+namespace ProxerSearchPlus.model.proxer.v1
 {
     public class TagEntry
     {

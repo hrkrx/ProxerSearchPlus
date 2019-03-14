@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using ProxerSearchPlus.model.v1;
+using ProxerSearchPlus.model.proxer.v1;
 
-namespace ProxerSearchPlus.controller.v1
+namespace ProxerSearchPlus.controller.proxer.v1
 {
     public static class EntryCache
     {
