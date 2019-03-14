@@ -16,19 +16,138 @@ namespace ProxerSearchPlus.model.proxer.v1
         public int rate_count { get; set; }
         public int clicks { get; set; }
         public string kat { get; set; }
-        public LizenzType license { get; set; }
+
+        private LizenzType license1;
+
+        public LizenzType Getlicense()
+        {
+            return license1;
+        }
+
+        public void Setlicense(LizenzType value)
+        {
+            license1 = value;
+        }
+
         public bool gate { get; set; }
-        public AdaptionEntry adaption_data { get; set; }
-        public SynonymEntry[] names { get; set; }
+
+        private AdaptionEntry adaption_data1;
+
+        public AdaptionEntry Getadaption_data()
+        {
+            return adaption_data1;
+        }
+
+        public void Setadaption_data(AdaptionEntry value)
+        {
+            adaption_data1 = value;
+        }
+
+        private SynonymEntry[] names1;
+
+        public SynonymEntry[] Getnames()
+        {
+            return names1;
+        }
+
+        public void Setnames(SynonymEntry[] value)
+        {
+            names1 = value;
+        }
+
         public string[] lang { get; set; }
-        public SeasonEntry[] seasons { get; set; }
-        public GroupEntry[] groups { get; set; }
-        public PublisherEntry[] publisher { get; set; }
-        public TagEntry[] tags { get; set; }
-        public GenreEntry[] genres { get; set; }
-        public CharacterEntry[] characters { get; set; }
-        public PersonEntry[] persons { get; set; }
-        public ForumEntry[] forum { get; set; }
+
+        private SeasonEntry[] seasons1;
+
+        public SeasonEntry[] Getseasons()
+        {
+            return seasons1;
+        }
+
+        public void Setseasons(SeasonEntry[] value)
+        {
+            seasons1 = value;
+        }
+
+        private GroupEntry[] groups1;
+
+        public GroupEntry[] Getgroups()
+        {
+            return groups1;
+        }
+
+        public void Setgroups(GroupEntry[] value)
+        {
+            groups1 = value;
+        }
+
+        private PublisherEntry[] publisher1;
+
+        public PublisherEntry[] Getpublisher()
+        {
+            return publisher1;
+        }
+
+        public void Setpublisher(PublisherEntry[] value)
+        {
+            publisher1 = value;
+        }
+
+        private TagEntry[] tags1;
+
+        public TagEntry[] Gettags()
+        {
+            return tags1;
+        }
+
+
+        private GenreEntry[] genres1;
+
+        public GenreEntry[] Getgenres()
+        {
+            return genres1;
+        }
+
+        public void Setgenres(GenreEntry[] value)
+        {
+            genres1 = value;
+        }
+
+        private CharacterEntry[] characters1;
+
+        public CharacterEntry[] Getcharacters()
+        {
+            return characters1;
+        }
+
+        public void Setcharacters(CharacterEntry[] value)
+        {
+            characters1 = value;
+        }
+
+        private PersonEntry[] persons1;
+
+        public PersonEntry[] Getpersons()
+        {
+            return persons1;
+        }
+
+        public void Setpersons(PersonEntry[] value)
+        {
+            persons1 = value;
+        }
+
+        private ForumEntry[] forum1;
+
+        public ForumEntry[] Getforum()
+        {
+            return forum1;
+        }
+
+        public void Setforum(ForumEntry[] value)
+        {
+            forum1 = value;
+        }
     }
 
     public enum LizenzType 

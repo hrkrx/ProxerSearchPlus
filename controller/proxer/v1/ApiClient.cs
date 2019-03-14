@@ -37,6 +37,11 @@ namespace ProxerSearchPlus.controller.proxer.v1
         /// <returns>A full entry from proxer</returns>
         public async Task<FullEntry> GetFullEntry(int id, bool disableCache = false)
         {
+            var fullEntryEndPoint = "https://proxer.me/api/v1/info/fullentry";
+            var entryEndPoint = "https://proxer.me/api/v1/info/entry";
+
+            
+
             return null;
         }
 
