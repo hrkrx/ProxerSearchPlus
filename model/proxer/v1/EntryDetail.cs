@@ -17,136 +17,136 @@ namespace ProxerSearchPlus.model.proxer.v1
         public int clicks { get; set; }
         public string kat { get; set; }
 
-        private LizenzType license1;
+        private LizenzType license;
 
         public LizenzType Getlicense()
         {
-            return license1;
+            return license;
         }
 
         public void Setlicense(LizenzType value)
         {
-            license1 = value;
+            license = value;
         }
 
         public bool gate { get; set; }
 
-        private AdaptionEntry adaption_data1;
+        private AdaptionEntry adaption_data;
 
         public AdaptionEntry Getadaption_data()
         {
-            return adaption_data1;
+            return adaption_data;
         }
 
         public void Setadaption_data(AdaptionEntry value)
         {
-            adaption_data1 = value;
+            adaption_data = value;
         }
 
-        private SynonymEntry[] names1;
+        private SynonymEntry[] names;
 
         public SynonymEntry[] Getnames()
         {
-            return names1;
+            return names;
         }
 
         public void Setnames(SynonymEntry[] value)
         {
-            names1 = value;
+            names = value;
         }
 
         public string[] lang { get; set; }
 
-        private SeasonEntry[] seasons1;
+        private SeasonEntry[] seasons;
 
         public SeasonEntry[] Getseasons()
         {
-            return seasons1;
+            return seasons;
         }
 
         public void Setseasons(SeasonEntry[] value)
         {
-            seasons1 = value;
+            seasons = value;
         }
 
-        private GroupEntry[] groups1;
+        private GroupEntry[] groups;
 
         public GroupEntry[] Getgroups()
         {
-            return groups1;
+            return groups;
         }
 
         public void Setgroups(GroupEntry[] value)
         {
-            groups1 = value;
+            groups = value;
         }
 
-        private PublisherEntry[] publisher1;
+        private PublisherEntry[] publisher;
 
         public PublisherEntry[] Getpublisher()
         {
-            return publisher1;
+            return publisher;
         }
 
         public void Setpublisher(PublisherEntry[] value)
         {
-            publisher1 = value;
+            publisher = value;
         }
 
-        private TagEntry[] tags1;
+        private TagEntry[] tags;
 
         public TagEntry[] Gettags()
         {
-            return tags1;
+            return tags;
         }
 
 
-        private GenreEntry[] genres1;
+        private GenreEntry[] genres;
 
         public GenreEntry[] Getgenres()
         {
-            return genres1;
+            return genres;
         }
 
         public void Setgenres(GenreEntry[] value)
         {
-            genres1 = value;
+            genres = value;
         }
 
-        private CharacterEntry[] characters1;
+        private CharacterEntry[] characters;
 
         public CharacterEntry[] Getcharacters()
         {
-            return characters1;
+            return characters;
         }
 
         public void Setcharacters(CharacterEntry[] value)
         {
-            characters1 = value;
+            characters = value;
         }
 
-        private PersonEntry[] persons1;
+        private PersonEntry[] persons;
 
         public PersonEntry[] Getpersons()
         {
-            return persons1;
+            return persons;
         }
 
         public void Setpersons(PersonEntry[] value)
         {
-            persons1 = value;
+            persons = value;
         }
 
-        private ForumEntry[] forum1;
+        private ForumEntry[] forum;
 
         public ForumEntry[] Getforum()
         {
-            return forum1;
+            return forum;
         }
 
         public void Setforum(ForumEntry[] value)
         {
-            forum1 = value;
+            forum = value;
         }
     }
 
