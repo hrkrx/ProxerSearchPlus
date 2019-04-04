@@ -34,5 +34,21 @@ namespace ProxerSearchPlus.controller.proxer.v1
 
             return result;
         }
+
+        public static bool CacheEntry<T>(T entry, int id)
+        {
+            if (!_Cache.ContainsKey(typeof(T)))
+            {
+                _Cache.Add(typeof(T), new Dictionary<int, object>());
+            }
+            if(_Cache[typeof(T)].ContainsKey(id))
+            {
+                _Cache[typeof(T)][id] = entry;
+            }
+            else
+            {
+                _Cache[typeof(T)].Add(id, entry);
+            }
+        }
     }
 }
