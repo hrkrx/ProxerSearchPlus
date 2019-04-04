@@ -5,6 +5,7 @@ using ProxerSearchPlus.controller.proxer.v1;
 
 namespace ProxerSearchPlus
 {
+    // this class is for testing purposes so that a browser is not needed for simple experimentation
     class Program
     {
         static void Main(string[] args)
