@@ -21,6 +21,11 @@ namespace ProxerSearchPlus.controller.proxer.v1
 
         public static T GetCachedEntry<T>(int id)
         {
+            if (!_IsInitiated)
+            {
+                return default(T);
+            }
+
             T result = default(T);
             if (!_Cache.ContainsKey(typeof(T)))
             {
@@ -35,7 +40,7 @@ namespace ProxerSearchPlus.controller.proxer.v1
             return result;
         }
 
-        public static bool CacheEntry<T>(T entry, int id)
+        public static void CacheEntry<T>(T entry, int id)
         {
             if (!_Cache.ContainsKey(typeof(T)))
             {
