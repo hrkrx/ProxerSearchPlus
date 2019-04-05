@@ -9,7 +9,7 @@ namespace ProxerSearchPlus.model.proxer.v1
 
         public Error GetError()
         {
-            throw new System.NotImplementedException();
+            return new Error(error);
         }
     }
 }

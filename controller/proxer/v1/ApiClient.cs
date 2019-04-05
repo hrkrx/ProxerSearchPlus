@@ -33,17 +33,31 @@ namespace ProxerSearchPlus.controller.proxer.v1
         /// This method returns a full entry for a given id while using as much from the cache as possible
         /// </summary>
         /// <param name="id">The id</param>
-        /// <param name="disableCache">if you want to load everything from proxer, ignoring the cache.null WARNING: Do not use this for regularly</param>
+        /// <param name="doNotUseCache">if you want to load everything from proxer, ignoring the cache. WARNING: Do not use this regularly</param>
         /// <returns>A full entry from proxer</returns>
-        public async Task<FullEntry> GetFullEntry(int id, bool disableCache = false)
+        public async Task<FullEntry> GetFullEntry(int id, bool doNotUseCache = false)
         {
             var fullEntryEndPoint = "https://proxer.me/api/v1/info/fullentry";
             var entryEndPoint = "https://proxer.me/api/v1/info/entry";
+            FullEntry result;
 
+            var postParameters = new Dictionary<string, string>();
+
+            if (id > 0)
+               postParameters.Add("id", id.ToString());
+
+            if (doNotUseCache)
+            {
+                result = await GetData<FullEntry>(postParameters, fullEntryEndPoint);
+            }
+            else
+            {
+                result = await GetData<FullEntry>(postParameters, entryEndPoint);                
+            }
             
-
-            return null;
+            return result;
         }
+
 
         /// <summary>
         /// Returns a list of "limit" entries for your input parameters
@@ -107,17 +121,17 @@ namespace ProxerSearchPlus.controller.proxer.v1
                 postParameters.Add("p", page);
             if (!string.IsNullOrWhiteSpace(tagspoilerfilter))
                 postParameters.Add("tagspoilerfilter", tagspoilerfilter);
-
             
-            using(var request = CreateMessage(endPoint, postParameters))
-            {
-                var response = await client.SendAsync(request);
-                var responseString = await response.Content.ReadAsStringAsync();
-                result = JsonConvert.DeserializeObject<EntrySearch>(responseString);
-            }
+            result = await GetData<EntrySearch>(postParameters, endPoint);
             return result;
         }
-
+        /// <summary>
+        /// Creates a sendable message 
+        /// </summary>
+        /// <param name="endPoint"></param>
+        /// <param name="parameters">post parameters to be included in the body</param>
+        /// <param name="testMode">if testmode is enabled no apikey is required</param>
+        /// <returns></returns>
         private HttpRequestMessage CreateMessage(string endPoint, Dictionary<string, string> parameters, bool testMode = false)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, endPoint);
@@ -130,7 +144,7 @@ namespace ProxerSearchPlus.controller.proxer.v1
             if (string.IsNullOrWhiteSpace(ApiKey))
                 testMode = true;
             else
-                request.Headers.Add("proxer-api-key", ApiKey);
+                request.Headers.Add("proxer-api-key", ApiKey); 
             request.Headers.Add("User-Agent", ApiUserAgent);
 
             if (testMode)
@@ -140,6 +154,25 @@ namespace ProxerSearchPlus.controller.proxer.v1
             request.Content = encodedContent;
 
             return request;
+        }
+
+        /// <summary>
+        /// Executes a request to an entrypoint with the given data and returns an object
+        /// </summary>
+        /// <param name="postData"></param>
+        /// <param name="endPoint"></param>
+        /// <typeparam name="T">The Type of the object to be returned (e.g. EntrySearch)</typeparam>
+        /// <returns>an object of type T</returns>
+        public async Task<T> GetData<T>(Dictionary<string, string> postData, string endPoint)
+        {
+            T result;
+            using(var request = CreateMessage(endPoint, postData))
+            {
+                var response = await client.SendAsync(request);
+                var responseString = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<T>(responseString);
+            }
+            return result;
         }
     }
 
