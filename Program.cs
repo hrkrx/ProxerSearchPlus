@@ -2,8 +2,8 @@
 using System.IO;
 using System.Linq;
 using ProxerSearchPlus.Caching;
-using ProxerSearchPlus.controller.proxer.v1;
-using ProxerSearchPlus.model.proxer.v1;
+using ProxerSearchPlus.Controller.Proxer.v1;
+using ProxerSearchPlus.Model.Proxer.v1;
 
 namespace ProxerSearchPlus
 {

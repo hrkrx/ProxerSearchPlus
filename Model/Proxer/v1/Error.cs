@@ -1,6 +1,6 @@
 using System;
 
-namespace ProxerSearchPlus.model.proxer.v1
+namespace ProxerSearchPlus.Model.Proxer.v1
 {
     public class Error
     {
@@ -30,7 +30,7 @@ namespace ProxerSearchPlus.model.proxer.v1
         APIkeyPermissionDenied = 1004,
         APIinvalidLoginToken = 1005,
         APIfunctionRestricted = 1006,
-        APIproxerMaintenance = 1007,
+        APIProxerMaintenance = 1007,
         APImaintenance = 1008,
         APIipBlocked = 2000,
         APInewsRequestError = 2001,

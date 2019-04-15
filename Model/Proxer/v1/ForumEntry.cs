@@ -1,7 +1,7 @@
 using ProxerSearchPlus.util;
 using ProxerSearchPlus.Caching;
 
-namespace ProxerSearchPlus.model.proxer.v1
+namespace ProxerSearchPlus.Model.Proxer.v1
 {
     [Cacheable]
     public class ForumEntry

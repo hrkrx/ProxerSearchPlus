@@ -1,4 +1,4 @@
-namespace ProxerSearchPlus.model.themoviedb.v4
+namespace ProxerSearchPlus.Model.themoviedb.v4
 {
     public class Error
     {

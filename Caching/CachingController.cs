@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using ProxerSearchPlus.controller.proxer.v1;
+using ProxerSearchPlus.Controller.Proxer.v1;
 
 namespace ProxerSearchPlus.Caching
 {
@@ -60,25 +60,28 @@ namespace ProxerSearchPlus.Caching
                     if (typeof(IEnumerable).IsAssignableFrom(field.FieldType))
                     {
                         var entries = NonGenericGetCachedEntry(field.FieldType.GetElementType(), parentId);
-                        if (field.FieldType.IsArray)
+                        if (entries?.Count > 0)
                         {
-                            field.SetValue(entry, Activator.CreateInstance(field.FieldType, new object[] { entries.Count })); // Add new []
-                            dynamic arrayProperty = field.GetValue(entry);
-                            var counter = 0;
-                            foreach (dynamic item in entries)
+                            if (field.FieldType.IsArray)
                             {
-                                arrayProperty[counter] = item;
-                                counter++;
-                            }
+                                field.SetValue(entry, Activator.CreateInstance(field.FieldType, new object[] { entries.Count })); // Add new []
+                                dynamic arrayProperty = field.GetValue(entry);
+                                var counter = 0;
+                                foreach (dynamic item in entries)
+                                {
+                                    arrayProperty[counter] = item;
+                                    counter++;
+                                }
 
-                        }
-                        else
-                        {
-                            field.SetValue(entry, Activator.CreateInstance(field.FieldType)); // Add new List / whatever
-                            dynamic listProperty = field.GetValue(entry);
-                            foreach (dynamic item in entries)
+                            }
+                            else
                             {
-                                listProperty.Add(item);
+                                field.SetValue(entry, Activator.CreateInstance(field.FieldType)); // Add new List / whatever
+                                dynamic listProperty = field.GetValue(entry);
+                                foreach (dynamic item in entries)
+                                {
+                                    listProperty.Add(item);
+                                }
                             }
                         }
                         
@@ -86,7 +89,10 @@ namespace ProxerSearchPlus.Caching
                     else
                     {
                         var entries = NonGenericGetCachedEntry(field.FieldType, parentId);
-                        field.SetValue(entry, entries.First());
+                        if (entries?.Count > 0)
+                        {
+                            field.SetValue(entry, entries.First());
+                        }
                     }
                 }
             }

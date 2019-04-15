@@ -1,4 +1,4 @@
-namespace ProxerSearchPlus.model.proxer.v1
+namespace ProxerSearchPlus.Model.Proxer.v1
 {
     public class FullEntry : IApiResponse
     {

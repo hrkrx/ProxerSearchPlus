@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using ProxerSearchPlus.model.proxer.v1;
+using ProxerSearchPlus.Model.Proxer.v1;
 
-namespace ProxerSearchPlus.controller.proxer.v1
+namespace ProxerSearchPlus.Controller.Proxer.v1
 {
     public class ApiClient
     {
@@ -33,12 +33,12 @@ namespace ProxerSearchPlus.controller.proxer.v1
         /// This method returns a full entry for a given id while using as much from the cache as possible
         /// </summary>
         /// <param name="id">The id</param>
-        /// <param name="doNotUseCache">if you want to load everything from proxer, ignoring the cache. WARNING: Do not use this regularly</param>
-        /// <returns>A full entry from proxer</returns>
+        /// <param name="doNotUseCache">if you want to load everything from Proxer, ignoring the cache. WARNING: Do not use this regularly</param>
+        /// <returns>A full entry from Proxer</returns>
         public async Task<FullEntry> GetFullEntry(int id, bool doNotUseCache = false)
         {
-            var fullEntryEndPoint = "https://proxer.me/api/v1/info/fullentry";
-            var entryEndPoint = "https://proxer.me/api/v1/info/entry";
+            var fullEntryEndPoint = "https://Proxer.me/api/v1/info/fullentry";
+            var entryEndPoint = "https://Proxer.me/api/v1/info/entry";
             FullEntry result;
 
             var postParameters = new Dictionary<string, string>();
@@ -89,7 +89,7 @@ namespace ProxerSearchPlus.controller.proxer.v1
                                                 string lengthlimit, string tags, string tagratefilter, string limit,
                                                 string page, string tagspoilerfilter)
         {
-            var endPoint = "https://proxer.me/api/v1/list/entrysearch";
+            var endPoint = "https://Proxer.me/api/v1/list/entrysearch";
             EntrySearch result;
             
             var postParameters = new Dictionary<string, string>();
@@ -149,7 +149,7 @@ namespace ProxerSearchPlus.controller.proxer.v1
             if (string.IsNullOrWhiteSpace(ApiKey))
                 testMode = true;
             else
-                request.Headers.Add("proxer-api-key", ApiKey); 
+                request.Headers.Add("Proxer-api-key", ApiKey); 
             request.Headers.Add("User-Agent", ApiUserAgent);
 
             if (testMode)

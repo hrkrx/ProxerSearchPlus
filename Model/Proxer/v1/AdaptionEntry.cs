@@ -1,6 +1,6 @@
 using System;
 
-namespace ProxerSearchPlus.model.proxer.v1
+namespace ProxerSearchPlus.Model.Proxer.v1
 {
     [Serializable]
     public class AdaptionEntry
