@@ -46,7 +46,7 @@ namespace ProxerSearchPlus.controller.proxer.v1
             if (id > 0)
                postParameters.Add("id", id.ToString());
 
-            if (doNotUseCache)
+            if (doNotUseCache) // insert Spongebob Meme
             {
                 result = await GetData<FullEntry>(postParameters, fullEntryEndPoint);
             }
@@ -58,6 +58,11 @@ namespace ProxerSearchPlus.controller.proxer.v1
             return result;
         }
 
+
+        public async Task<EntrySearch> Search(string name)
+        {
+            return await Search(name, null, null, null, null, null, null, null, null, null, null, null, null, "10", null, null);
+        }
 
         /// <summary>
         /// Returns a list of "limit" entries for your input parameters

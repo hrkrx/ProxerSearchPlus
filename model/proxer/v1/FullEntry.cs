@@ -11,5 +11,12 @@ namespace ProxerSearchPlus.model.proxer.v1
         {
             return new Error(error);
         }
+
+        public override string ToString()
+        {
+            string result = data.ToString();
+            result += "\n" + GetError();
+            return result;
+        }
     }
 }

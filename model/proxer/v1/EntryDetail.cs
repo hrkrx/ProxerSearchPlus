@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 namespace ProxerSearchPlus.model.proxer.v1
 {
     public class EntryDetail
@@ -17,7 +20,7 @@ namespace ProxerSearchPlus.model.proxer.v1
         public int clicks { get; set; }
         public string kat { get; set; }
 
-        private LizenzType license;
+        public LizenzType license;
 
         public LizenzType Getlicense()
         {
@@ -31,7 +34,7 @@ namespace ProxerSearchPlus.model.proxer.v1
 
         public bool gate { get; set; }
 
-        private AdaptionEntry adaption_data;
+        public AdaptionEntry adaption_data;
 
         public AdaptionEntry Getadaption_data()
         {
@@ -43,7 +46,7 @@ namespace ProxerSearchPlus.model.proxer.v1
             adaption_data = value;
         }
 
-        private SynonymEntry[] names;
+        public SynonymEntry[] names;
 
         public SynonymEntry[] Getnames()
         {
@@ -57,7 +60,7 @@ namespace ProxerSearchPlus.model.proxer.v1
 
         public string[] lang { get; set; }
 
-        private SeasonEntry[] seasons;
+        public SeasonEntry[] seasons;
 
         public SeasonEntry[] Getseasons()
         {
@@ -69,7 +72,7 @@ namespace ProxerSearchPlus.model.proxer.v1
             seasons = value;
         }
 
-        private GroupEntry[] groups;
+        public GroupEntry[] groups;
 
         public GroupEntry[] Getgroups()
         {
@@ -81,7 +84,7 @@ namespace ProxerSearchPlus.model.proxer.v1
             groups = value;
         }
 
-        private PublisherEntry[] publisher;
+        public PublisherEntry[] publisher;
 
         public PublisherEntry[] Getpublisher()
         {
@@ -93,15 +96,14 @@ namespace ProxerSearchPlus.model.proxer.v1
             publisher = value;
         }
 
-        private TagEntry[] tags;
+        public TagEntry[] tags;
 
         public TagEntry[] Gettags()
         {
             return tags;
         }
 
-
-        private GenreEntry[] genres;
+        public GenreEntry[] genres;
 
         public GenreEntry[] Getgenres()
         {
@@ -113,7 +115,7 @@ namespace ProxerSearchPlus.model.proxer.v1
             genres = value;
         }
 
-        private CharacterEntry[] characters;
+        public CharacterEntry[] characters;
 
         public CharacterEntry[] Getcharacters()
         {
@@ -125,7 +127,7 @@ namespace ProxerSearchPlus.model.proxer.v1
             characters = value;
         }
 
-        private PersonEntry[] persons;
+        public PersonEntry[] persons;
 
         public PersonEntry[] Getpersons()
         {
@@ -137,7 +139,7 @@ namespace ProxerSearchPlus.model.proxer.v1
             persons = value;
         }
 
-        private ForumEntry[] forum;
+        public ForumEntry[] forum;
 
         public ForumEntry[] Getforum()
         {
@@ -147,6 +149,14 @@ namespace ProxerSearchPlus.model.proxer.v1
         public void Setforum(ForumEntry[] value)
         {
             forum = value;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("[id:{0}, name:{1}, genre:{2}, fsk:{3}, description:{4}, medium:{5}, adaption_type:{6}, adaption_value:{7} count:{5}, state:{6}, rate_sum:{7}, rate_count:{8}, clicks:{9}, kat:{10}, license:{11}, gate:{12}, adaption_data:{13}, names:[{14}], lang:[{15}], seasons:[{16}], groups:[{17}], publisher:[{18}], tags:[{19}], genres:[{20}], characters:[{21}], persons:[{22}], forum:[{23}]]", 
+                                id, name, genre, fsk, description, medium, adaption_type, adaption_value, count, state, rate_sum, rate_count, clicks, kat, Getlicense(), gate, Getadaption_data()?.ToString(), Getnames() != null ? string.Join(", ", Getnames().Select(x => x.ToString())) : "", lang != null ? string.Join(", ", lang) : "", Getseasons() != null ? string.Join(", ", Getseasons().Select(x => x.ToString())) : "",
+                                Getgroups() != null ? string.Join(", ", Getgroups().Select(x => x.ToString())) : "", Getpublisher() != null ? string.Join(", ", Getpublisher().Select(x => x.ToString())) : "", Gettags() != null ?  string.Join(", ", Gettags().Select(x => x.ToString())) : "", Getgenres() != null ? string.Join(", ", Getgenres().Select(x => x.ToString())) : "",
+                                Getcharacters() != null ? string.Join(", ", Getcharacters().Select(x => x.ToString())) : "", Getpersons() != null ? string.Join(", ", Getpersons().Select(x => x.ToString())) : "", Getforum() != null ? string.Join(", ", Getforum().Select(x => x.ToString())) : "");
         }
     }
 

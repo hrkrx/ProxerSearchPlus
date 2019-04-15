@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using ProxerSearchPlus.Caching;
 using ProxerSearchPlus.controller.proxer.v1;
+using ProxerSearchPlus.model.proxer.v1;
 
 namespace ProxerSearchPlus
 {
@@ -14,12 +16,21 @@ namespace ProxerSearchPlus
             var apiKey = File.ReadAllText("api.key");
             client.ApiKey = apiKey;
             client.ApiUserAgent = "DotNetCoreApiClientLtP";
-            var result = client.Search("test", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null).GetAwaiter().GetResult();
+            var result = client.Search("Gacha").GetAwaiter().GetResult();
             var entries = result.data.OrderByDescending(x => x.rate_sum / (x.rate_count == 0 ? 1 : x.rate_count));
-            foreach (var entry in entries)
-            {
-                Console.WriteLine(entry);
-            }
+            
+            var fullEntry = client.GetFullEntry(entries.First().id, true).GetAwaiter().GetResult();
+
+            Console.WriteLine(fullEntry);
+            
+            CachingController.CacheAllCacheableProperties(fullEntry.data, fullEntry.data.id);
+
+            var data = client.GetFullEntry(entries.First().id).GetAwaiter().GetResult().data;
+
+            CachingController.PopulateEntryFromCache(data, data.id);
+
+            Console.WriteLine(data);
+
         }
     }
 }

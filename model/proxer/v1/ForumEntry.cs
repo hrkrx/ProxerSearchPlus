@@ -1,3 +1,5 @@
+using ProxerSearchPlus.util;
+
 namespace ProxerSearchPlus.model.proxer.v1
 {
     public class ForumEntry
@@ -14,5 +16,10 @@ namespace ProxerSearchPlus.model.proxer.v1
         public long last_post_time { get; set; }
         public int last_post_userid { get; set; }
         public string last_post_guest_name { get; set; }
+
+        public override string ToString()
+        {
+            return StringUtils.ClassToString(this);
+        }
     }
 }
