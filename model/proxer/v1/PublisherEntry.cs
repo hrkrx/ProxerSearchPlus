@@ -1,8 +1,10 @@
 using System;
+using ProxerSearchPlus.Caching;
 
 namespace ProxerSearchPlus.model.proxer.v1
 {
     [Serializable]
+    [Cacheable]
     public class PublisherEntry
     {
         public int id { get; set; }

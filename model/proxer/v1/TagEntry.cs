@@ -3,7 +3,7 @@ using ProxerSearchPlus.Caching;
 
 namespace ProxerSearchPlus.model.proxer.v1
 {
-    [Cachable]
+    [Cacheable]
     public class TagEntry
     {
         public int id { get; set; }

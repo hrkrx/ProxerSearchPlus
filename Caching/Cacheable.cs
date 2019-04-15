@@ -4,9 +4,9 @@ namespace ProxerSearchPlus.Caching
     /// This CustomAttribute is used for marking classes as cacheable
     /// </summary>
     [System.AttributeUsage(System.AttributeTargets.All, Inherited = false, AllowMultiple = true)]
-    sealed class Cachable : System.Attribute
+    sealed class Cacheable : System.Attribute
     {
-        public Cachable()
+        public Cacheable()
         {
         }
         

@@ -18,11 +18,11 @@ namespace ProxerSearchPlus.Caching
             var fields = parent.GetType().GetFields();
             foreach (var field in fields)
             {
-                var cacheable = field.FieldType.GetCustomAttributes(typeof(Cachable), false).FirstOrDefault() != null; 
+                var cacheable = field.FieldType.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() != null; 
                 var elementType = field.FieldType.GetElementType();
                 if (elementType != null)
                 {                    
-                    cacheable = elementType.GetCustomAttributes(typeof(Cachable), false).FirstOrDefault() != null;
+                    cacheable = elementType.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() != null;
                 }
 
                 if(cacheable)
@@ -48,11 +48,11 @@ namespace ProxerSearchPlus.Caching
             var fields = entry.GetType().GetFields();
             foreach (var field in fields)
             {
-                var cacheable = field.FieldType.GetCustomAttributes(typeof(Cachable), false).FirstOrDefault() != null; 
+                var cacheable = field.FieldType.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() != null; 
                 var elementType = field.FieldType.GetElementType();
                 if (elementType != null)
                 {                    
-                    cacheable = elementType.GetCustomAttributes(typeof(Cachable), false).FirstOrDefault() != null;
+                    cacheable = elementType.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() != null;
                 }
 
                 if(cacheable)
@@ -94,7 +94,7 @@ namespace ProxerSearchPlus.Caching
 
         private static HashSet<object> NonGenericGetCachedEntry(Type type, int parentId)
         {
-            if(type.GetCustomAttributes(typeof(Cachable), false).FirstOrDefault() == null)
+            if(type.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() == null)
             {
                 throw new TypeNotCacheablesException("Type " + type.ToString() + " is not marked as Cacheable.");
             }
@@ -115,7 +115,7 @@ namespace ProxerSearchPlus.Caching
 
         public static HashSet<object> GetCachedEntry<T>(int parentId)
         {
-            if(typeof(T).GetCustomAttributes(typeof(Cachable), false).FirstOrDefault() == null)
+            if(typeof(T).GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() == null)
             {
                 throw new TypeNotCacheablesException("Type " + typeof(T).ToString() + " is not marked as Cacheable.");
             }
@@ -137,7 +137,7 @@ namespace ProxerSearchPlus.Caching
         private static void NonGenericCachingEntry(object entry, int id)
         {
             Type type = entry.GetType();
-            if(type.GetCustomAttributes(typeof(Cachable), false).FirstOrDefault() == null)
+            if(type.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() == null)
             {
                 throw new TypeNotCacheablesException("Type " + type.ToString() + " is not marked as Cacheable.");
             }
@@ -159,7 +159,7 @@ namespace ProxerSearchPlus.Caching
 
         public static void CacheEntry<T>(T entry, int id)
         {
-            if(typeof(T).GetCustomAttributes(typeof(Cachable), false).FirstOrDefault() == null)
+            if(typeof(T).GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() == null)
             {
                 throw new TypeNotCacheablesException("Type " + typeof(T).ToString() + " is not marked as Cacheable.");
             }
