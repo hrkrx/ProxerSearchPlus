@@ -1,10 +1,12 @@
 using System;
 using System.Linq;
+using ProxerSearchPlus.Caching;
 
 namespace ProxerSearchPlus.Model.Proxer.v1
 {
     public class EntryDetail
     {
+        [IdColumn]
         public int id { get; set; }
         public string name { get; set; }
         public string genre { get; set; }

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using ProxerSearchPlus.Caching;
+using ProxerSearchPlus.Caching.Database.MongoDB;
 using ProxerSearchPlus.Controller.Proxer.v1;
 using ProxerSearchPlus.Model.Proxer.v1;
 
@@ -16,10 +17,10 @@ namespace ProxerSearchPlus
             var apiKey = File.ReadAllText("api.key");
             client.ApiKey = apiKey;
             client.ApiUserAgent = "DotNetCoreApiClientLtP";
-            var result = client.Search("Gacha").GetAwaiter().GetResult();
+            var result = client.Search("OnePunch").GetAwaiter().GetResult();
             var entries = result.data.OrderByDescending(x => x.rate_sum / (x.rate_count == 0 ? 1 : x.rate_count));
             
-            var fullEntry = client.GetFullEntry(entries.First().id, true).GetAwaiter().GetResult();
+            var fullEntry = client.GetFullEntry(entries.First().id).GetAwaiter().GetResult();
 
             Console.WriteLine(fullEntry);
             
@@ -31,6 +32,13 @@ namespace ProxerSearchPlus
 
             Console.WriteLine(data);
 
+            var db = new MongoDBConnector();
+            //db.Put(data);
+            var test = db.Get(data.id, data.GetType());
+            foreach (var item in test)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

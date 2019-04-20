@@ -1,6 +1,9 @@
 using System.Linq;
+using ProxerSearchPlus.Caching;
+
 namespace ProxerSearchPlus.Model.Proxer.v1
 {
+    [Cacheable]
     public class EntrySearch : IApiResponse
     {
         public int error { get; set; }

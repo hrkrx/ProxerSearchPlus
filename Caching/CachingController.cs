@@ -30,9 +30,12 @@ namespace ProxerSearchPlus.Caching
                     if (typeof(IEnumerable).IsAssignableFrom(field.FieldType))
                     {
                         IEnumerable value = field.GetValue(parent) as IEnumerable;
-                        foreach (var item in value)
+                        if (value != null)
                         {
-                            NonGenericCachingEntry(item, parentId);
+                            foreach (var item in value)
+                            {
+                                NonGenericCachingEntry(item, parentId);
+                            } 
                         }
                     }
                     else

@@ -1,10 +1,13 @@
 using System;
+using ProxerSearchPlus.Caching;
 
 namespace ProxerSearchPlus.Model.Proxer.v1
 {
     [Serializable]
+    [Cacheable]
     public class AdaptionEntry
     {
+        [IdColumn]
         public int id { get; set; }
         public string name { get; set; }
         public string medium { get; set; }

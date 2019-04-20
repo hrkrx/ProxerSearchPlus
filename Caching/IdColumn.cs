@@ -1,12 +1,12 @@
 namespace ProxerSearchPlus.Caching
 {
     /// <summary>
-    /// This CustomAttribute is used for marking classes as cacheable
+    /// This CustomAttribute is used for marking properties as id
     /// </summary>
     [System.AttributeUsage(System.AttributeTargets.All, Inherited = false, AllowMultiple = true)]
-    sealed class Cacheable : System.Attribute
+    sealed class IdColumn : System.Attribute
     {
-        public Cacheable()
+        public IdColumn()
         {
         }
     }

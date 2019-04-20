@@ -1,8 +1,10 @@
 using System;
+using ProxerSearchPlus.Caching;
 
 namespace ProxerSearchPlus.Model.Proxer.v1
 {
     [Serializable]
+    [Cacheable]
     public class CharacterEntry
     {
         public int id { get; set; }

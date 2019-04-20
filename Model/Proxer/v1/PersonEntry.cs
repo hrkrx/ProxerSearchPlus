@@ -7,6 +7,7 @@ namespace ProxerSearchPlus.Model.Proxer.v1
     [Cacheable]
     public class PersonEntry
     {
+        [IdColumn]
         public int pid { get; set; }
         public string name { get; set; }
         public string type { get; set; }
