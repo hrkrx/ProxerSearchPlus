@@ -13,7 +13,8 @@ namespace ProxerSearchPlus
     {
         static void Main(string[] args)
         {
-            var client = ApiClient.GetInstance();
+            var db = new MongoDBConnector();
+            var client = ApiClient.GetInstance(db);
             var apiKey = File.ReadAllText("api.key");
             client.ApiKey = apiKey;
             client.ApiUserAgent = "DotNetCoreApiClientLtP";
@@ -32,7 +33,6 @@ namespace ProxerSearchPlus
 
             Console.WriteLine(data);
 
-            var db = new MongoDBConnector();
             //db.Put(data);
             var test = db.Get(data.id, data.GetType());
             foreach (var item in test)

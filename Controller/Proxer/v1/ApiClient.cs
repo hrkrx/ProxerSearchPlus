@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ProxerSearchPlus.Caching;
+using ProxerSearchPlus.Caching.Database;
 using ProxerSearchPlus.Model.Proxer.v1;
 
 namespace ProxerSearchPlus.Controller.Proxer.v1
@@ -15,16 +17,19 @@ namespace ProxerSearchPlus.Controller.Proxer.v1
 
         public string ApiUserAgent { get; set; }
 
-        private ApiClient()
+        public IDatabaseConnection DatabaseConnection { get; set; }
+
+        private ApiClient(IDatabaseConnection dbConnection)
         {
+            DatabaseConnection = dbConnection;
             client = new HttpClient();
         }
 
-        public static ApiClient GetInstance()
+        public static ApiClient GetInstance(IDatabaseConnection dbConnection)
         {
             if (instance == null)
             {
-                instance = new ApiClient();
+                instance = new ApiClient(dbConnection);
             }
             return instance;
         }
@@ -52,6 +57,14 @@ namespace ProxerSearchPlus.Controller.Proxer.v1
             }
             else
             {
+                // Database stuff for enablin the cache
+                var dbResult = DatabaseConnection.Get(id, typeof(EntryDetail));
+                if (dbResult.Count() > 0)
+                {
+                    result = new FullEntry();
+                    result.data = dbResult;
+                    result.id = id;
+                }
                 result = await GetData<FullEntry>(postParameters, entryEndPoint);                
             }
             
