@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using ProxerSearchPlus.Caching;
 using ProxerSearchPlus.Caching.Database;
 using ProxerSearchPlus.Model.Proxer.v1;
+using System.Linq;
+using System.Collections;
 
 namespace ProxerSearchPlus.Controller.Proxer.v1
 {
@@ -58,14 +60,18 @@ namespace ProxerSearchPlus.Controller.Proxer.v1
             else
             {
                 // Database stuff for enablin the cache
-                var dbResult = DatabaseConnection.Get(id, typeof(EntryDetail));
-                if (dbResult.Count() > 0)
+                var dbResult = DatabaseConnection.Get(id, typeof(EntryDetail)).Cast<EntryDetail>();
+                if (dbResult.Any())
                 {
                     result = new FullEntry();
-                    result.data = dbResult;
-                    result.id = id;
+                    result.data = dbResult.First();
+                    result.code = 1;
                 }
-                result = await GetData<FullEntry>(postParameters, entryEndPoint);                
+                else
+                {
+                    result = await GetData<FullEntry>(postParameters, entryEndPoint); 
+                    DatabaseConnection.Put(result.data);                                   
+                }
             }
             
             return result;

@@ -20,7 +20,8 @@ namespace ProxerSearchPlus.Model.Proxer.v1
     public enum ErrorCode
     {
         NoError = 0,
-        UnknownError = 1,
+        LoadedFromCache = 1,
+        UnknownError = 2,
 
         // Proxer API Errors
         APInotExisting = 1000,
