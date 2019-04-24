@@ -46,6 +46,33 @@ namespace ProxerSearchPlus.Caching
             }
         }
 
+        public static bool CanPopulateEntryFromCache(object entry, int parentId)
+        {
+            int cachedEntries = 0;
+            var fields = entry.GetType().GetFields();
+            foreach (var field in fields)
+            {
+                var cacheable = field.FieldType.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() != null; 
+                var elementType = field.FieldType.GetElementType();
+                if (elementType != null)
+                {                    
+                    cacheable = elementType.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() != null;
+                }
+
+                if(cacheable)
+                {
+                    var entries = NonGenericGetCachedEntry(field.FieldType, parentId);
+                    if (entries?.Count > 0)
+                    {
+                        cachedEntries++;
+                        break;
+                    }
+                }
+            }
+
+            return cachedEntries > 0;
+        }
+
         public static void PopulateEntryFromCache(object entry, int parentId)
         {
             var fields = entry.GetType().GetFields();
@@ -105,7 +132,10 @@ namespace ProxerSearchPlus.Caching
         {
             if(type.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() == null)
             {
-                throw new TypeNotCacheablesException("Type " + type.ToString() + " is not marked as Cacheable.");
+                if (type.HasElementType && type.GetElementType().GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() == null)
+                {
+                    throw new TypeNotCacheablesException("Type " + type.ToString() + " is not marked as Cacheable.");
+                }
             }
 
             HashSet<object> result = default(HashSet<object>);

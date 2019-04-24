@@ -16,23 +16,55 @@ namespace ProxerSearchPlus.Controller.Proxer.v1
         private HttpClient client { get; set; }
 
         public string ApiKey { get; set; }
-
         public string ApiUserAgent { get; set; }
 
         public IDatabaseConnection DatabaseConnection { get; set; }
 
-        private ApiClient(IDatabaseConnection dbConnection)
-        {
-            DatabaseConnection = dbConnection;
+        private ApiClient()
+        {   
             client = new HttpClient();
         }
 
+        private ApiClient(IDatabaseConnection dbConnection)
+        : base()
+        {
+            DatabaseConnection = dbConnection;
+        }
+
+        /// <summary>
+        /// Gets the static Instance of an ApiClient without initializing the database connection.
+        /// But the database connection could be already initialized.
+        /// If no database connection is present memory caching will be used. 
+        /// </summary>
+        /// <returns></returns>
+        public static ApiClient GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new ApiClient();
+            }
+            return instance;
+        }
+
+        /// <summary>
+        /// Gets the static instance of ApiClient with initialization of the databaseconnection.
+        /// If a dbconnection is already present it will be replaced (if the prior connection equals the new, nothing is done).
+        /// </summary>
+        /// <param name="dbConnection"></param>
+        /// <returns></returns>
         public static ApiClient GetInstance(IDatabaseConnection dbConnection)
         {
             if (instance == null)
             {
                 instance = new ApiClient(dbConnection);
             }
+
+            if (!instance.DatabaseConnection.Equals(dbConnection))
+            {
+                instance.DatabaseConnection.Dispose();
+                instance.DatabaseConnection = dbConnection;
+            }
+
             return instance;
         }
 
@@ -60,17 +92,36 @@ namespace ProxerSearchPlus.Controller.Proxer.v1
             else
             {
                 // Database stuff for enablin the cache
-                var dbResult = DatabaseConnection.Get(id, typeof(EntryDetail)).Cast<EntryDetail>();
-                if (dbResult.Any())
+
+                if (DatabaseConnection != null)
                 {
-                    result = new FullEntry();
-                    result.data = dbResult.First();
-                    result.code = 1;
+                    // DatabaseCaching is enabled so we use it!
+                    var dbResult = DatabaseConnection.Get(id, typeof(EntryDetail)).Cast<EntryDetail>();
+                    if (dbResult.Any())
+                    {
+                        result = new FullEntry();
+                        result.data = dbResult.First();
+                        result.code = 1;
+                    }
+                    else
+                    {
+                        result = await GetData<FullEntry>(postParameters, entryEndPoint); 
+                        DatabaseConnection.Put(result.data);                                   
+                    }
                 }
                 else
                 {
+                    // Database caching is not available, so use memory caching
                     result = await GetData<FullEntry>(postParameters, entryEndPoint); 
-                    DatabaseConnection.Put(result.data);                                   
+                    if (CachingController.CanPopulateEntryFromCache(result.data, result.data.id))
+                    {
+                        CachingController.PopulateEntryFromCache(result.data, result.data.id);
+                    }
+                    else
+                    {
+                        result = await GetData<FullEntry>(postParameters, fullEntryEndPoint); 
+                        CachingController.CacheAllCacheableProperties(result.data, result.data.id);
+                    }
                 }
             }
             

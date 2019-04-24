@@ -159,5 +159,10 @@ namespace ProxerSearchPlus.Caching.Database.MongoDB
                 throw ex;
             }
         }
+
+        public void Dispose()
+        {
+            // no need to dispose anything here, but for other databases this might be needed
+        }
     }
 }

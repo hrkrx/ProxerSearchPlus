@@ -14,7 +14,7 @@ namespace ProxerSearchPlus
         static void Main(string[] args)
         {
             var db = new MongoDBConnector();
-            var client = ApiClient.GetInstance(db);
+            var client = ApiClient.GetInstance();
             var apiKey = File.ReadAllText("api.key");
             client.ApiKey = apiKey;
             client.ApiUserAgent = "DotNetCoreApiClientLtP";
@@ -25,20 +25,20 @@ namespace ProxerSearchPlus
 
             Console.WriteLine(fullEntry);
             
-            CachingController.CacheAllCacheableProperties(fullEntry.data, fullEntry.data.id);
+            // CachingController.CacheAllCacheableProperties(fullEntry.data, fullEntry.data.id);
 
-            var data = client.GetFullEntry(entries.First().id).GetAwaiter().GetResult().data;
+            fullEntry = client.GetFullEntry(entries.First().id).GetAwaiter().GetResult();
 
-            CachingController.PopulateEntryFromCache(data, data.id);
+            // CachingController.PopulateEntryFromCache(data, data.id);
 
-            Console.WriteLine(data);
+            Console.WriteLine(fullEntry);
 
-            //db.Put(data);
-            var test = db.Get(data.id, data.GetType());
-            foreach (var item in test)
-            {
-                Console.WriteLine(item);
-            }
+            // db.Put(data);
+            // var test = db.Get(data.id, data.GetType());
+            // foreach (var item in test)
+            // {
+            //     Console.WriteLine(item);
+            // }
         }
     }
 }
