@@ -52,7 +52,7 @@ namespace ProxerSearchPlus.Caching
             var fields = entry.GetType().GetFields();
             foreach (var field in fields)
             {
-                var cacheable = field.FieldType.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() != null; 
+                var cacheable = field.FieldType.GetCustomAttributes(typeof(Cacheable), false).FirstOrDefault() != null;
                 var elementType = field.FieldType.GetElementType();
                 if (elementType != null)
                 {                    
