@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxerSearchPlus", "ProxerSearchPlus.Api\ProxerSearchPlus.csproj", "{8E1EA254-A761-42AB-86B5-D0208B3CB8EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxerSearchPlus.Gui", "ProxerSearchPlus.Gui\ProxerSearchPlus.Gui.csproj", "{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{8E1EA254-A761-42AB-86B5-D0208B3CB8EA}.Release|x64.Build.0 = Release|Any CPU
 		{8E1EA254-A761-42AB-86B5-D0208B3CB8EA}.Release|x86.ActiveCfg = Release|Any CPU
 		{8E1EA254-A761-42AB-86B5-D0208B3CB8EA}.Release|x86.Build.0 = Release|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Debug|x64.Build.0 = Debug|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Debug|x86.Build.0 = Debug|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Release|x64.ActiveCfg = Release|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Release|x64.Build.0 = Release|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Release|x86.ActiveCfg = Release|Any CPU
+		{9F35047F-20F7-4726-ABE0-C64B77A8BFEF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="searchbar">
+    <br>
+    <form method="POST">
+        <input class="rounded-text-input centered inner-shadow autofit-width" placeholder="Search..." name="query"/>
+    </form>
+</div>
+<div class="live-results">
+    @foreach (var item in Model)
+    {
+        <p>Name: @item.name</p>
+    }
+</div>

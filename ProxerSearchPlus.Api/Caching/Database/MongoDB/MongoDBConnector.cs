@@ -16,6 +16,15 @@ namespace ProxerSearchPlus.Api.Caching.Database.MongoDB
     {
 
         private static MongoClient client;
+
+        public MongoDBConnector(string connection)
+        {
+            if(client == null)
+            {
+                client = new MongoClient(connection);
+            }
+        }
+
         public MongoDBConnector()
         {
             if(client == null)
