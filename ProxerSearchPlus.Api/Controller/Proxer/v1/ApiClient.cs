@@ -26,8 +26,8 @@ namespace ProxerSearchPlus.Api.Controller.Proxer.v1
         }
 
         private ApiClient(IDatabaseConnection dbConnection)
-        : base()
         {
+            client = new HttpClient();
             DatabaseConnection = dbConnection;
         }
 
@@ -231,6 +231,54 @@ namespace ProxerSearchPlus.Api.Controller.Proxer.v1
             return request;
         }
 
+        public EntrySearch NonAsyncSearch(string name, string language, string type, string genre, string nogenre, 
+                                                string taggenre, string notaggenre, string fsk, string sort, string length, 
+                                                string lengthlimit, string tags, string tagratefilter, string limit,
+                                                string page, string tagspoilerfilter)
+        {
+            var endPoint = "https://Proxer.me/api/v1/list/entrysearch";
+            EntrySearch result;
+            
+            var postParameters = new Dictionary<string, string>();
+
+            if (!string.IsNullOrWhiteSpace(name))
+                postParameters.Add("name", name);
+            if (!string.IsNullOrWhiteSpace(language))
+                postParameters.Add("language", language);
+            if (!string.IsNullOrWhiteSpace(type))
+                postParameters.Add("type", type);
+            if (!string.IsNullOrWhiteSpace(genre))
+                postParameters.Add("genre", genre);
+            if (!string.IsNullOrWhiteSpace(nogenre))
+                postParameters.Add("nogenre", nogenre);
+            if (!string.IsNullOrWhiteSpace(taggenre))
+                postParameters.Add("taggenre", taggenre);
+            if (!string.IsNullOrWhiteSpace(notaggenre))
+                postParameters.Add("notaggenre", notaggenre);
+            if (!string.IsNullOrWhiteSpace(fsk))
+                postParameters.Add("fsk", fsk);
+            if (!string.IsNullOrWhiteSpace(sort))
+                postParameters.Add("sort", sort);
+            if (!string.IsNullOrWhiteSpace(length))
+                postParameters.Add("length", length);
+            if (!string.IsNullOrWhiteSpace(lengthlimit))
+                postParameters.Add("length-limit", lengthlimit);
+            if (!string.IsNullOrWhiteSpace(tags))
+                postParameters.Add("tags", tags);
+            if (!string.IsNullOrWhiteSpace(tagratefilter))
+                postParameters.Add("tagratefilter", tagratefilter);
+            if (!string.IsNullOrWhiteSpace(limit))
+                postParameters.Add("limit", limit);
+            if (!string.IsNullOrWhiteSpace(page))
+                postParameters.Add("p", page);
+            if (!string.IsNullOrWhiteSpace(tagspoilerfilter))
+                postParameters.Add("tagspoilerfilter", tagspoilerfilter);
+            
+            result = NonAsyncGetData<EntrySearch>(postParameters, endPoint);
+            return result;
+        }
+       
+
         /// <summary>
         /// Executes a request to an entrypoint with the given data and returns an object
         /// </summary>
@@ -243,8 +291,20 @@ namespace ProxerSearchPlus.Api.Controller.Proxer.v1
             T result;
             using(var request = CreateMessage(endPoint, postData))
             {
-                var response = await client.SendAsync(request);
+                var response = client.SendAsync(request).GetAwaiter().GetResult();
                 var responseString = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<T>(responseString);
+            }
+            return result;
+        }
+
+        public T NonAsyncGetData<T>(Dictionary<string, string> postData, string endPoint)
+        {
+            T result;
+            using(var request = CreateMessage(endPoint, postData))
+            {
+                var response = client.SendAsync(request).GetAwaiter().GetResult();
+                var responseString = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                 result = JsonConvert.DeserializeObject<T>(responseString);
             }
             return result;

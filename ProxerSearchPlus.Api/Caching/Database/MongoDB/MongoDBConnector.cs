@@ -75,6 +75,7 @@ namespace ProxerSearchPlus.Api.Caching.Database.MongoDB
             }
             catch (System.Exception ex) 
             {
+                Console.WriteLine(ex.StackTrace);
                 return false;
             }
         }

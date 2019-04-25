@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProxerSearchPlus.Gui.Models;
 using ProxerSearchPlus.Api.Controller.Proxer.v1;
+using ProxerSearchPlus.Api.Model.Proxer.v1;
 
 namespace ProxerSearchPlus.Gui.Controllers
 {
@@ -16,18 +17,20 @@ namespace ProxerSearchPlus.Gui.Controllers
         static HomeController() {
             var db = new  ProxerSearchPlus.Api.Caching.Database.MongoDB.MongoDBConnector();
             _proxer = ApiClient.GetInstance(db);
+            _proxer.ApiKey = System.IO.File.ReadAllText("api.key");
+            _proxer.ApiUserAgent = "LtpDotnetCoreApiClient";
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(new List<Entry>());
         }
 
         [HttpPost]
         public IActionResult Index(string query)
         {
-            var searchResult = _proxer.Search(query).GetAwaiter().GetResult().data;
-            return View(searchResult);
+            var searchResult = _proxer.Search(query).GetAwaiter().GetResult();
+            return View(searchResult.data);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
