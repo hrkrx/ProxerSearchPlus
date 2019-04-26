@@ -12,6 +12,7 @@
 
 .searchbar {
   width: 100%;
+  position: fixed;
 }
 
 .rounded-text-input {
@@ -24,8 +25,6 @@
 
 .centered {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .autofit-width {

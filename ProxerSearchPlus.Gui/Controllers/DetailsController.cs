@@ -10,7 +10,7 @@ using ProxerSearchPlus.Api.Model.Proxer.v1;
 
 namespace ProxerSearchPlus.Gui.Controllers
 {
-    public class DetailsController : Controller
+    public class DetailsController : Microsoft.AspNetCore.Mvc.Controller
     {
         private static ApiClient _proxer;
 
