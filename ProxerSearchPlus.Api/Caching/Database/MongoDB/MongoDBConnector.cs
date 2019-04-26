@@ -36,7 +36,7 @@ namespace ProxerSearchPlus.Api.Caching.Database.MongoDB
 
         public IMongoDatabase GetDatabase()
         {
-            return client.GetDatabase("ProxerSearchPlus.Api");
+            return client.GetDatabase("ProxerSearchPlus");
         }
 
 

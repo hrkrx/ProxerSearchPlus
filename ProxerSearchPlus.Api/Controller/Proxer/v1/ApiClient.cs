@@ -128,6 +128,10 @@ namespace ProxerSearchPlus.Api.Controller.Proxer.v1
             return result;
         }
 
+        public async Task<EntrySearch> Search(string name, int limit)
+        {
+            return await Search(name, null, null, null, null, null, null, null, null, null, null, null, null, limit.ToString(), null, null);
+        }
 
         public async Task<EntrySearch> Search(string name)
         {

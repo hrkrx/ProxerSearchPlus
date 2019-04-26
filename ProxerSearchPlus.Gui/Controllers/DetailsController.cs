@@ -17,12 +17,14 @@ namespace ProxerSearchPlus.Gui.Controllers
         static DetailsController() {
             var db = new  ProxerSearchPlus.Api.Caching.Database.MongoDB.MongoDBConnector();
             _proxer = ApiClient.GetInstance(db);
+            _proxer.ApiKey = System.IO.File.ReadAllText("api.key");
+            _proxer.ApiUserAgent = "LtpDotnetCoreApiClient";
         }
 
-        public IActionResult Entry()
+        public IActionResult Entry(int id)
         {
-            
-            return View();
+            var details = _proxer.GetFullEntry(id).GetAwaiter().GetResult();
+            return View(details.data);
         }
     }
 }

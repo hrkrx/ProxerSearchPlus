@@ -21,15 +21,13 @@ namespace ProxerSearchPlus.Gui.Controllers
             _proxer.ApiUserAgent = "LtpDotnetCoreApiClient";
         }
 
-        public IActionResult Index()
-        {
-            return View(new List<Entry>());
-        }
-
-        [HttpPost]
         public IActionResult Index(string query)
         {
-            var searchResult = _proxer.Search(query).GetAwaiter().GetResult();
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return View(new List<Entry>());
+            }
+            var searchResult = _proxer.Search(query, 100).GetAwaiter().GetResult();
             return View(searchResult.data);
         }
 
