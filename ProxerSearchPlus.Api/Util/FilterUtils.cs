@@ -21,25 +21,62 @@ namespace ProxerSearchPlus.Api.Util
                     if (partialQuerySymbol.Contains("orderby:"))
                     {
                         string value = valueRegex.Match(partialQuerySymbol).Groups[1].ToString();
+                        if (value.Equals("cr") || value.Equals("combinedrate"))
+                        {
+                            
+                        }
+                        else if (value.Equals("c") || value.Equals("clicks"))
+                        {
+                            
+                        }
+                        else if (value.Equals("c") || value.Equals("clicks"))
+                        {
+                            
+                        }
                     }
                     else if (partialQuerySymbol.Contains("mcr:") || partialQuerySymbol.Contains("mincombinedrating:"))
                     {
+                        string value = valueRegex.Match(partialQuerySymbol).Groups[1].ToString();
+                        if (value.Contains(""))
+                        {
+                            
+                        }
                         
                     }
                     else if (partialQuerySymbol.Contains("mc:") || partialQuerySymbol.Contains("minclicks:"))
                     {
+                        string value = valueRegex.Match(partialQuerySymbol).Groups[1].ToString();
+                        if (value.Contains(""))
+                        {
+                            
+                        }
                         
                     }
                     else if (partialQuerySymbol.Contains(""))
                     {
+                        string value = valueRegex.Match(partialQuerySymbol).Groups[1].ToString();
+                        if (value.Contains(""))
+                        {
+                            
+                        }
                         
                     }
                     else if (partialQuerySymbol.Contains(""))
                     {
+                        string value = valueRegex.Match(partialQuerySymbol).Groups[1].ToString();
+                        if (value.Contains(""))
+                        {
+                            
+                        }
                         
                     }
                     else if (partialQuerySymbol.Contains(""))
                     {
+                        string value = valueRegex.Match(partialQuerySymbol).Groups[1].ToString();
+                        if (value.Contains(""))
+                        {
+                            
+                        }
                         
                     }
                 }
