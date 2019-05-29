@@ -14,21 +14,36 @@
 <br>
 <br>
 <br>
-<div class="live-results">
+<div class="listing">
    @foreach (var item in Model)
    {
-       <p class="highlight">
-           @item.medium :
-           <a href="/details/entry/@item.id">@item.name</a>
-           @{
-               double rateCount = item.rate_count;
-               if (rateCount == 0) 
-               {
-                   rateCount = 1;
-               }
-               double rating = item.rate_sum / rateCount;
-           }
-           (@rating)
-        </p>
+    <searchresult>
+        <div class="sedcard">
+            <div class="sedcardimagecontainer">
+                <img src="img/Default-Icon-icon.png"/>
+            </div>
+            <div class="sedcarddescription">
+                 @{
+                     string name = @item.name;
+                     if (@item.name.Length > 30)
+                     {
+                        name = name.Substring(0, 30) + "...";
+                     }
+                 }
+                <a href="/details/entry/@item.id"><h5>@name</h5></a>
+                <p class="highlight">
+                    @item.medium :
+                    @{
+                        double rateCount = item.rate_count;
+                        if (rateCount == 0) 
+                        {
+                            rateCount = 1;
+                        }
+                        double rating = Math.Round(item.rate_sum / rateCount, 2);
+                    } (@rating)
+                </p>
+            </div>
+        </div>
+    </searchresult>
    }
 </div>

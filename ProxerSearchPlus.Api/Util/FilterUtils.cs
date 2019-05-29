@@ -18,7 +18,7 @@ namespace ProxerSearchPlus.Api.Util
             {
                 if (partialQuerySymbol.Contains("!"))
                 {
-                    if (partialQuerySymbol.Contains("orderby:"))
+                    if (partialQuerySymbol.Contains("o:") || partialQuerySymbol.Contains("orderby:"))
                     {
                         string value = valueRegex.Match(partialQuerySymbol).Groups[1].ToString();
                         if (value.Equals("cr") || value.Equals("combinedrate"))
@@ -29,7 +29,7 @@ namespace ProxerSearchPlus.Api.Util
                         {
                             
                         }
-                        else if (value.Equals("c") || value.Equals("clicks"))
+                        else if (value.Equals("n") || value.Equals("name"))
                         {
                             
                         }
@@ -37,10 +37,7 @@ namespace ProxerSearchPlus.Api.Util
                     else if (partialQuerySymbol.Contains("mcr:") || partialQuerySymbol.Contains("mincombinedrating:"))
                     {
                         string value = valueRegex.Match(partialQuerySymbol).Groups[1].ToString();
-                        if (value.Contains(""))
-                        {
-                            
-                        }
+                        
                         
                     }
                     else if (partialQuerySymbol.Contains("mc:") || partialQuerySymbol.Contains("minclicks:"))
