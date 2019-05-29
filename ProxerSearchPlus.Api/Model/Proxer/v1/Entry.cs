@@ -25,10 +25,10 @@ namespace ProxerSearchPlus.Api.Model.Proxer.v1
 
         public DateTime updated = DateTime.UtcNow;
 
-        public override string ToString()
+        public override string ToString ()
         {
-            return string.Format("[id:{0}, name:{1}, genre:{2}, medium:{3}, medium_format:{4}, count:{5}, state:{6}, rate_sum:{7}, rate_count:{8}, language:{9}, year:{10}, season:{11}, type:{12}, kat:{13}, count_available:{14}]", 
-                                id, name, genre, medium, medium_format, count, state, rate_sum, rate_count, language, year, season, type, kat, count_available);
+            return string.Format ("[id:{0}, name:{1}, genre:{2}, medium:{3}, medium_format:{4}, count:{5}, state:{6}, rate_sum:{7}, rate_count:{8}, language:{9}, year:{10}, season:{11}, type:{12}, kat:{13}, count_available:{14}]",
+                id, name, genre, medium, medium_format, count, state, rate_sum, rate_count, language, year, season, type, kat, count_available);
         }
     }
 }
